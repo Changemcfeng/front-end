@@ -1,0 +1,1587 @@
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="Movable Type  5.2.2">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--link rel="stylesheet" href="http://www.ruanyifeng.com/blog/styles.css" type="text/css" /-->
+<link rel="start" href="http://www.ruanyifeng.com/blog/" title="Home">
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/ruanyifeng">
+<script src="https://hm.baidu.com/hm.js?f89e0235da0841927341497d774e7b15"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="http://www.ruanyifeng.com/blog/mt.js"></script>
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="http://www.ruanyifeng.com/blog/">
+<dc:title>阮一峰的网络日志</dc:title>
+<dc:description>Ruan YiFeng&apos;s Blog</dc:description>
+<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/3.0/" />
+</Work>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+</License>
+</rdf:RDF>
+-->
+
+<style>
+body {
+  background-color: #f5f5d5;
+}
+
+#container::before {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+  text-align: center;
+  content: "本站显示不正常，可能因为您使用了广告拦截器。";
+}
+
+</style>
+<script>
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+//loadjscssfile("http://www.ruanyifeng.com/blog/styles.css", "css");
+loadjscssfile('/static/themes/theme_scrapbook/theme_scrapbook.min.css', "css");
+
+
+function checker() {
+// var img = document.querySelector('img[src^="http://www.ruanyifeng.com/blog/images"]');
+var img = document.querySelector('a > img[src*="wangbase.com/blogimg/asset/"]');
+  if (img && window.getComputedStyle(img).display === 'none'){
+    var sponsor = document.querySelector('.entry-sponsor');
+    var prompt = document.createElement('div');
+    prompt.style = 'border: 1px solid #c6c6c6;border-radius: 4px;background-color: #f5f2f0;padding: 15px; font-size: 14px;';
+  prompt.innerHTML = '<p>您使用了广告拦截器，导致本站内容无法显示。</p><p>请将 www.ruanyifeng.com 加入白名单，解除广告屏蔽后，刷新页面。谢谢。</p>';
+    sponsor.parentNode.replaceChild(prompt, sponsor);
+    document.querySelector('#main-content').innerHTML = '';
+  }
+}
+
+setTimeout(checker, 1000);
+</script><link rel="stylesheet" type="text/css" href="/static/themes/theme_scrapbook/theme_scrapbook.min.css">
+
+    
+    <link rel="prev" href="http://www.ruanyifeng.com/blog/2008/10/the_most_luxury_school_in_shanghai.html" title="关于上海最豪华的学校">
+    <link rel="next" href="http://www.ruanyifeng.com/blog/2008/10/2008_nobel_prize_in_economics.html" title="关于2008年诺贝尔经济学奖">
+    
+    <title>防止网页被嵌入框架的代码 - 阮一峰的网络日志</title>
+<script src="http://static.bshare.cn/b/components/bsStatic.js?v=20150603" type="text/javascript" charset="utf-8"></script><script src="http://static.bshare.cn/b/engines/bs-engine.js?v=20150603" type="text/javascript" charset="utf-8"></script><style type="text/css">a.bshareDiv,#bsPanel,#bsMorePanel,#bshareF{border:none;background:none;padding:0;margin:0;font:12px Helvetica,Calibri,Tahoma,Arial,宋体,sans-serif;line-height:14px;}#bsPanel div,#bsMorePanel div,#bshareF div{display:block;}.bsRlogo .bsPopupAwd,.bsRlogoSel .bsPopupAwd,.bsLogo .bsPopupAwd,.bsLogoSel .bsPopupAwd{line-height:16px !important;}a.bshareDiv div,#bsFloatTab div{*display:inline;zoom:1;display:inline-block;}a.bshareDiv img,a.bshareDiv div,a.bshareDiv span,a.bshareDiv a,#bshareF table,#bshareF tr,#bshareF td{text-decoration:none;background:none;margin:0;padding:0;border:none;line-height:1.2}a.bshareDiv span{display:inline;float:none;}div.buzzButton{cursor:pointer;font-weight:bold;}.buzzButton .shareCount a{color:#333}.bsStyle1 .shareCount a{color:#fff}span.bshareText{white-space:nowrap;}span.bshareText:hover{text-decoration:underline;}a.bshareDiv .bsPromo,div.bshare-custom .bsPromo{display:none;position:absolute;z-index:100;}a.bshareDiv .bsPromo.bsPromo1,div.bshare-custom .bsPromo.bsPromo1{width:51px;height:18px;top:-18px;left:0;line-height:16px;font-size:12px !important;font-weight:normal !important;color:#fff;text-align:center;background:url(http://static.bshare.cn/frame/images/bshare_box_sprite2.gif) no-repeat 0 -606px;}div.bshare-custom .bsPromo.bsPromo2{background:url(http://static.bshare.cn/frame/images/bshare_promo_sprite.gif) no-repeat;cursor:pointer;}</style><style type="text/css">.bsBox{display:none;z-index:100000001;font-size:12px;background:url(http://static.bshare.cn/frame/images//background-opaque-dark.gif) !important;padding:6px !important;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}.bsClose{_overflow:hidden;cursor:pointer;position:absolute;z-index:10000000;color:#666;font-weight:bold;font-family:Helvetica,Arial;font-size:14px;line-height:20px;}.bsTop{color:#666;background:#f2f2f2;height:24px;line-height:24px;border-bottom:1px solid #e8e8e8;}.bsTop span{float:left;}.bsFrameDiv,#bsMorePanel{border:none;background:#fff;}.bsReturn{float:right;*margin-right:20px;margin-right:36px;text-align:right;cursor:pointer;line-height:24px;color:#666;opacity:0.5;}#bsReturn:hover{text-decoration:underline;opacity:1;}</style><script src="http://static.bshare.cn/b/components/bsMore.js?v=20150603" type="text/javascript" charset="utf-8"></script><script src="http://static.bshare.cn/b/styles/bshareS1.js?v=20150603" type="text/javascript" charset="utf-8"></script><style type="text/css">div.bsClear{clear:both;height:0;line-height:0;overflow:hidden;font-size:0;}.bsSearchDiv{padding:5px 15px;background-color:#fafafa;}.bFind-wrapper-top{background:#fff;border-color:#ccc #aaa #aaa #ccc;border-style:solid;border-width:1px;height:16px;padding:4px;margin:0;}.bFind-wrapper-top input{padding:0 !important;border:none !important;box-shadow:none !important;line-height:16px !important;}.bFind-placeholder{background:url("http://static.bshare.cn/css/images/search-icon.gif") no-repeat;display:block;float:left;height:16px;width:16px;}.bFind{background:none;border:none;float:left;font-size:11px !important;height:16px !important;margin-left:3px;outline:none;padding:0;width:400px;}.bsPlatDiv{height:322px;background:#fff;overflow:auto;padding:0 15px;}#bsLogoList{display:block;list-style:none;overflow:hidden;margin:0;padding:0;}#bsLogoList li{float:left;display:inline-block;width:71px;text-align:center;font-size:12px;height:80px;margin:0 !important;}#bsLogoList .bsPlatIcon{cursor:pointer;display:block !important;text-align:center;}#bsLogoList .bsPlatImg{width:32px;height:32px;border:none !important;display:inline-block;}#bsLogoList .bsPlatImg:hover{-moz-border-radius:7px;-webkit-border-radius:7px;border-radius:7px;box-shadow:0 0 15px #a7a8ac;}#bsLogoList .bsPlatName{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-align:center;color:#333 !important;margin-top:2px;line-height:140%;*width:70px;}#bsLogoList .bsPromoM{text-align:center;}.bsFooterDiv{height:24px;line-height:24px;padding:0 15px;border-top:1px solid #e8e8e8;background:#f2f2f2;text-align:right;}a.bsLogoLink{color:#666;}.bsLogoLink:hover{text-decoration:underline;}.bsPromoM{background:url(http://static.bshare.cn/frame/images//bshare_box_sprite2.gif) no-repeat top left;}.bsNew,.bsHot,.bsRec,.bsAwd{background-position:0 -552px;width:19px;margin:5px auto 1px;line-height:16px;height:18px;font-size:12px;color:#fff;overflow:hidden;}.bsNew{background-position:0 -570px;}.bsRec{width:30px;background-position:0 -588px;}.bsAwd{background:url(http://static.bshare.cn/frame/images//promot/promote.gif) no-repeat;}</style><script src="http://bshare.optimix.cn/bshare_view?Callback=bShare.viewcb&amp;url=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog%2F2008%2F10%2Fanti-frameset_javascript_codes.html&amp;h=&amp;uuid=15e016b4-0028-44f1-a40d-a3c9d9c13c28&amp;l=17&amp;lite=1&amp;ref=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog%2Fjavascript%2F&amp;ot=防止网页被嵌入框架的代码 - 阮一峰的网络日志&amp;cs=UTF-8" type="text/javascript" charset="utf-8"></script><style type="text/css">a.bsSiteLink{text-decoration:none;color:#666;}a.bsSiteLink:hover{text-decoration:underline;}a.bshareDiv{overflow:hidden;height:16px;line-height:18px;font-size:14px;color:#333;padding-left:0;}a.bshareDiv:hover{text-decoration:none;}div.bsTitle{padding:0 8px;border-bottom:1px solid #e8e8e8;color:#666;background:#f2f2f2;text-align:left;}div.buzzButton{cursor:pointer;}div.bsRlogo,div.bsRlogoSel{width:68px;float:left;margin:0;padding:2px 0;}div.bsRlogo a,div.bsRlogoSel a{float:left;}div.bsLogo,div.bsLogoSel{float:left;width:111px;text-align:left;height:auto;padding:2px 4px;margin:2px 0;white-space:nowrap;overflow:hidden;}div.bsLogoSel,div.bsRlogoSel{border:1px solid #ddd;background:#f1f1f1;}div.bsLogo,div.bsRlogo{border:1px solid #fff;background:#fff;}div.bsLogo a,div.bsLogoSel a{display:block;height:16px;line-height:16px;padding:0 0 0 24px;text-decoration:none;float:left;overflow:hidden;}div.bsLogoSel a,div.bsRlogoSel a{color:#000;border:none;}div.bsLogo a,div.bsRlogo a{color:#666;border:none;}div.bsLogoLink{width:121px;overflow:hidden;background:#FFF;float:left;margin:3px 0;}#bsLogin{float:right;text-align:right;overflow:hidden;height:100%;}#bsPanel{position:absolute;z-index:100000000;font-size:12px;width:258px;background:url(http://static.bshare.cn/frame/images/background-opaque-dark.png) !important;padding:6px !important;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}div.bsClear{clear:both;height:0;line-height:0;font-size:0;overflow:hidden;}div.bsPopupAwd{background:url(http://static.bshare.cn/frame/images//bshare_box_sprite2.gif) no-repeat top left;background-position:0 -624px;width:18px;padding-left:3px;text-align:center;float:left;margin-left: 2px;height:15px;font-size:12px;color:#fff;overflow:hidden;}div.bsRlogo .bsPopupAwd,div.bsRlogoSel .bsPopupAwd{float:left;margin:5px 0 0 -14px;}</style><style type="text/css">a.bsSiteLink{text-decoration:none;color:#666;}a.bsSiteLink:hover{text-decoration:underline;}a.bshareDiv{overflow:hidden;height:16px;line-height:18px;font-size:14px;color:#333;padding-left:0;}a.bshareDiv:hover{text-decoration:none;}div.bsTitle{padding:0 8px;border-bottom:1px solid #e8e8e8;color:#666;background:#f2f2f2;text-align:left;}div.buzzButton{cursor:pointer;}div.bsRlogo,div.bsRlogoSel{width:68px;float:left;margin:0;padding:2px 0;}div.bsRlogo a,div.bsRlogoSel a{float:left;}div.bsLogo,div.bsLogoSel{float:left;width:111px;text-align:left;height:auto;padding:2px 4px;margin:2px 0;white-space:nowrap;overflow:hidden;}div.bsLogoSel,div.bsRlogoSel{border:1px solid #ddd;background:#f1f1f1;}div.bsLogo,div.bsRlogo{border:1px solid #fff;background:#fff;}div.bsLogo a,div.bsLogoSel a{display:block;height:16px;line-height:16px;padding:0 0 0 24px;text-decoration:none;float:left;overflow:hidden;}div.bsLogoSel a,div.bsRlogoSel a{color:#000;border:none;}div.bsLogo a,div.bsRlogo a{color:#666;border:none;}div.bsLogoLink{width:121px;overflow:hidden;background:#FFF;float:left;margin:3px 0;}#bsLogin{float:right;text-align:right;overflow:hidden;height:100%;}#bsPanel{position:absolute;z-index:100000000;font-size:12px;width:258px;background:url(http://static.bshare.cn/frame/images/background-opaque-dark.png) !important;padding:6px !important;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}div.bsClear{clear:both;height:0;line-height:0;font-size:0;overflow:hidden;}div.bsPopupAwd{background:url(http://static.bshare.cn/frame/images//bshare_box_sprite2.gif) no-repeat top left;background-position:0 -624px;width:18px;padding-left:3px;text-align:center;float:left;margin-left: 2px;height:15px;font-size:12px;color:#fff;overflow:hidden;}div.bsRlogo .bsPopupAwd,div.bsRlogoSel .bsPopupAwd{float:left;margin:5px 0 0 -14px;}</style></head>
+<body id="scrapbook" class="mt-entry-archive one-column">
+<script>
+if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+/*
+window.addEventListener('load', function(event) {
+  setTimeout(function () {
+    hab('#sup-post-2');
+    hab('#cre-inner');
+  }, 1000);
+});
+*/
+</script>
+    <div id="container">
+        <div id="container-inner">
+
+            <div id="header">
+    <div id="header-inner">
+        <div id="header-content">
+
+
+            <div id="header-name">阮一峰的网络日志 <span id="site_location"> » <a href="http://www.ruanyifeng.com/blog/" accesskey="1">首页</a></span><span id="site_archive"> » <a href="http://www.ruanyifeng.com/blog/archives.html">档案</a></span>
+</div>
+
+<div id="google_search">
+<!-- SiteSearch Google -->
+<form action="https://www.baidu.com/s" target="_blank" method="get" id="cse-search-box">
+  <div>
+  <input type="text" size="20" name="origin" class="searchbox" id="sbi" value="">
+  <input type="hidden" name="wd" value="">
+  <!--input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' inurl:www.ruanyifeng.com/blog'" /-->
+  <input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' 阮一峰'">
+</div>
+</form>
+
+<!-- SiteSearch Google -->
+</div>
+<div id="feed_icon">
+<a href="/feed.html" title="订阅Feed">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAUzSURBVHjavFdbbFRVFF3nPjoz7dTWTittaW0jUDRAUqaNojyqREnEQKgfUj9MqqAmhqRt/OCD4CuY+Kckoh+aiGKC+gMJbdHoRysJ8dkhhmJLNdDKtJU+6GMK87j3Hs85d2Z6HzNtMYWb3Dn3NWftvfba+5xNYDl+e6Fkj6yqb/oDRbWq14vlPBLRKCITkxf0ROLt+hNjp1PPSRK4kA3vF1dXNRcWlyA2OQU9eos9opAkAiKxD+XkKO6t15aRWO7J/MgmAZU8MEgexgZHMX518Dh72sYMmVKShnxWuWHdHtxKIDIYTgMuDzgfmSOIQkYMpdUF8OY92Hytt4/jvkg47czzU16iQovM3QFwmNck+Yyduu7D6NA0Z6JR4THntFs9V4tWQg6Ui3s6MwKDncsFTnXKLJhDSeUK3AgPtyhccDzmVs999buRt/1Vm4i0od+hX7+MRG87jPGB/w1u8FPj9xEw7McVrnYuOCvtpjTth3J/nTg99c8LRhKhr6D3dTB5R24bXFwbMXBsyZzeoXaycEpJ95TB09AGX/NpqLVNtw8urnVzLvHjFNxiFqRy2OOHuqUVnue+ACkoWzo4O6lGzTmuHq6nPvY2m9rVqjrIK2rMEKxqyG5NPAKt+wjo0LklgfNxJkZMA3KJvqRUk3z5UFY3QH14P0h+WUY79HPvgv7VuSg4ZRGY1YgZgqXmORccF17sy2ehnf9AeO085K2HQFbtXBScj0LcpgF2cN+WV+DZ/LJQu6gD4R7oV7pBJwbSgtMvfiPoVp56DySwxm7EtkMs1WdAB7qzggsDJKQYsHucSkOudrkiCPWR/fA2nYCn8SNIK4NptSMyAu3sAdDRkIsJdfth0LzSrODUoPNZ4KI9SxJI5UHk7D4GdQfz2us31c7CoHMjRkKuDPHseCMrONVhNcDJwMJpKFVvg9L4OaTiNWm1x789KCqkrXhVBiEz0WYCT2nAzQAD1/vaETv1GrRfP4Vx5cfMNcDPwvP0h0DhanPym7OIf/+O67vcJ1/PCJ4KgdzaUP6Wz+dU+5yIL6fV+PsHGAOdwlPpvvUOyeeAVGyCdqkDNB6DPjsBSrnndfOGevOh3RhGItxvA+fX1CtbGFhgYUFkFMZPR6F1HnClHq8HyubWtJexX06CRmdt33hrd7nA7SFY4qoGpnYuOKcRykPPgDCBcsHx9Iv+fNL2PueBehCWUfYQIIMGLOCcOmXDXsh1+yCt35tUPfvzGFuSvzvoinXOxqa02qOhM6733nVP2MAdaej2XN11DPKjLZCD+yBvahGCo7JfTKAN9UD7s8Oe9zUNIhz8fWI8DG2k38WCFdxugANcXrvTVd1IEbuv3Jour7Hzn7jLMBNfKs7R3i67gRVrbeCOEDhinmWhAatsqdquM2XzHZINhK2cqTjHr/XZdVJUbgN3MWAVXKbSyg9jesRW2xP9di+lwrL5ojM3m2H/kG9hwcIA37c71W6wJdW2J2S5nrjYbq/t1AHAhJsKQeyfPvf6IMJgghPJhFZ4x0KlfLFvt22du45Au/A1SOlGc0P672XXwhLtOcM0kTTEMMd0qkVmMNXxMd/tsedUjInr4SQDgOfeXMSiN0FCL5WHah4L1qqYXPJOJlttd+a5M+YpcG5poLYKQ5f+6JJ4r8bbJYP47hq4r7QAs9PjYNhHJd4o8l5taiwuOpa7AS4XKqI/5NjJbTnaWK92nLdLuhQAJayRNMiygXPBeQN+Qbvu0zDc3y+aUzhbkGR73sI7ljvUnndx2q3t+X8CDAD66FtrIL864AAAAABJRU5ErkJggg==" alt="" style="border: 0pt none;">
+</a></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            <div id="content">
+                <div id="content-inner">
+
+
+                    <div id="alpha">
+                        <div id="alpha-inner">
+
+
+                            <div id="entry-1132" class="entry-asset asset hentry">
+                                <div class="asset-header">
+<div class="asset-nav entry-nav">
+
+<div class="entry-location">
+<ul>
+<li>上一篇：<a href="http://www.ruanyifeng.com/blog/2008/10/the_most_luxury_school_in_shanghai.html" title="关于上海最豪华的学校">关于上海最豪华的学校&nbsp;</a></li>
+<li>下一篇：<a href="http://www.ruanyifeng.com/blog/2008/10/2008_nobel_prize_in_economics.html" title="关于2008年诺贝尔经济学奖">关于2008年诺贝尔经</a></li>
+</ul>
+</div>
+
+
+    
+                                    <div class="entry-categories">
+                                        <p>分类<span class="delimiter">：</span></p>
+                                        <ul>
+                                            <li><a href="http://www.ruanyifeng.com/blog/javascript/" rel="tag">JavaScript</a></li>
+                                        </ul>
+                                    </div>
+    
+
+
+                                            
+<div class="entry-location-mobile" style="float: right;">
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2008/10/the_most_luxury_school_in_shanghai.html" title="关于上海最豪华的学校">⇐&nbsp;</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2008/10/2008_nobel_prize_in_economics.html" title="关于2008年诺贝尔经济学奖">&nbsp;⇒</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+                          
+<article class="hentry">
+                                    <h1 id="page-title" class="asset-name entry-title">防止网页被嵌入框架的代码</h1>
+                                            <div id="share_button" class="social-share" style="float:right;padding-right:2em;padding-top:1em;">
+<a class="bshareDiv" href="http://www.bshare.cn/share" style="display: block; text-decoration: none; padding: 0px; margin: 0px; font-size: 12px; height: 21px; width: 51px;"><div class="bsPromo bsPromo1"></div><div class="buzzButton bsStyle10" style="height:21px;color:#333;;background:transparent url(http://static.bshare.cn/frame/images/button_custom10-zh-Orange.gif) no-repeat;text-align:center;width:51px;"></div><div style="clear:both;"></div></a>
+
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=15e016b4-0028-44f1-a40d-a3c9d9c13c28&amp;style=10&amp;bgcolor=#fff&amp;bp=weixin,qqim,qzone,qqmb,sinaminiblog,fanfou,xueqiu,douban,facebook,twitter,gplus,instapaper&amp;ssc=false"></script>
+<script type="text/javascript" charset="utf-8">
+bShare.addEntry({
+    title: document.getElementById("page-title").innerHTML,
+url:window.location.href
+});
+</script>
+</div>
+
+<div class="asset-meta">
+                                        
+
+                                            <p class="vcard author">作者： <a class="fn url" href="http://www.ruanyifeng.com">阮一峰</a></p>
+                                    <p>日期： <a href="http://www.ruanyifeng.com/blog/2008/10/"><abbr class="published" title="2008-10-12T21:12:37+08:00">2008年10月12日</abbr></a></p>
+
+
+                                    
+</div>
+
+                    
+<div class="entry-sponsor">
+<a title="腾讯课堂 NEXT 学院" href="https://ke.qq.com/next_detail/index.html?id=1&amp;from=800007110" target="_blank">
+<p id="sponsor-text" style="box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+    border: 1px solid #e5e4e9;
+    background-color: #d0e4a9;
+    margin: 1em 0 0;
+    padding: 0.6em 0.6em 0.4em 0.6em;
+    border-radius: 0.3em 0.3em 0.1em 0.1em;
+    color: #076a66;">感谢 <span style="text-decoration: underline;">腾讯课堂NEXT学院</span> 赞助本站，<span style="text-decoration: underline;">腾讯官方的前端课程</span> 免费试学。</p>
+<script>
+var sponsorTxt = document.getElementById('sponsor-text');
+sponsorTxt.innerHTML = '感谢 <span style="text-decoration: underline;">腾讯课堂NEXT学院</span> 赞助本站，<span style="text-decoration: underline;">腾讯官方的前端课程</span> 免费试学。';
+</script>
+<p style="padding:0em;margin:0 0 1.5em 0;border: 1px solid #e5e4e9;border-radius: 0.1em 0.1em 0.3em 0.3em;background-color: #28344a;text-align: center;" class="entry-sponsor-img">
+  <img alt="腾讯课堂 NEXT 学院" id="support-img" src="https://www.wangbase.com/blogimg/asset/201910/bg2019100802.jpg" style="border: none;width: 100%;max-width: 100%;display: inline-block;">
+
+
+
+</p>
+</a>
+</div>
+
+
+                                
+                                <div class="asset-content entry-content" id="main-content">
+
+                                    <!-- div class="asset-body" -->
+                                        <p>最近，国内开始流行另一种流氓行为：<strong>使用框架（Frame），将你的网页嵌入它的网页中。</strong></p>
+                                    <!-- /div -->
+
+
+                                    <!-- div id="more" class="asset-more" -->
+                                        <p>比如，有一家网站号称自己是"口碑聚合门户"，提供全国各个网上论坛的精华内容。但是，其实它就是用框架抓取他人的网页，然后在上面加上自己的广告和站标，这同盗版书商有何不同？！</p>
+
+<p>不明内情的访问者，只看到地址栏是该门户的URL，不知道真正内容部分的网页，其实来自另一个网站。</p>
+
+<p><strong>为什么我反对这种做法？</strong></p>
+
+<blockquote>
+
+<p>　　1）它故意屏蔽了被嵌入网页的网址，侵犯了原作者的著作权，以及访问者的知情权；</p>
+
+<p>　　2）大量业者使用的是不可见框架，使得框架网页与被嵌入的网页视觉上完全相同，欺骗性极高；</p>
+
+<p>　　3）不良业者在被嵌入网页的上方或周围附加广告（甚至病毒和木马），不仅破坏原作者的设计意图和形象，而且属于侵权利用他人资源的谋利行为；</p>
+
+<p>　　4）如果访问者在框架内部，从一个网页点击到另一个网页，浏览器的地址栏是不变的，这是很差的用户体验，并且访问者会将这种体验归咎于原网页的作者。</p>
+
+</blockquote>
+
+<p><strong>如果确有必要，将他人的网页嵌入自己的框架，那么应该同时满足以下三个条件：</strong></p>
+
+<blockquote>
+
+<p>　　A. 在框架网页的醒目位置，清楚地说明该网页使用了框架技术，并明确列出原网页的URL网址。</p>
+
+<p>　　B. 在框架网页的醒目位置，向访问者提供"移除框架"的功能。</p>
+
+<p>　　C. 不得附加任何广告或恶意代码。</p>
+
+</blockquote>
+
+<p>如果你经常使用<a href="http://images.google.com" target="_blank">Google的图片搜索</a>，你就会知道，Google就是这样做的。</p>
+
+<p>当然，流氓业者不会理睬你的正当要求。所以，<strong>我写了一段很简单的javascript代码，大家只要将它放入网页源码的头部，那些流氓就没有办法使用你的网页了。</strong></p>
+
+<blockquote><div>
+
+<p>&lt;script type="text/javascript"&gt;</p>
+
+<p>if (window!=top)  // 判断当前的window对象是否是top对象</p>
+
+<p>top.location.href =window.location.href; // 如果不是，将top对象的网址自动导向被嵌入网页的网址</p>
+
+<p>&lt;/script&gt;</p>
+
+</div></blockquote>
+
+<p><strong>UPDATE</strong></p>
+
+<p><strong>2010.8.15</strong></p>
+
+<p>发布<a href="http://www.ruanyifeng.com/blog/2010/08/anti-frameset_javascript_codes_continued.html" target="_blank">升级版代码</a>，使得除了本地域名以外，其他域名一律无法将你的网页嵌入框架。</p>
+
+<p>（完）</p>
+                                    <!-- /div -->
+
+                                </div>
+    <script type="text/javascript" src="/newwindow.js"></script>
+                                <div class="asset-footer">
+
+<h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2008-10-12T21:12:37+08:00">2008年10月12日</abbr></li>
+
+</ul>
+                                </div>
+</article>
+                            </div>
+
+  <div style="display: inline-block ! important;width: 100%;">
+  <p style="text-align:center;font-size: 16px;">
+    <a title="极客时间" target="_blank" href="https://time.geekbang.org/college/algorithm/100034302?utm_source=time_web&amp;utm_medium=ryfC&amp;utm_term=ryfC">如何掌握算法？</a>
+    <br>
+    <a title="极客时间" href="https://time.geekbang.org/college/algorithm/100034302?utm_source=time_web&amp;utm_medium=ryfC&amp;utm_term=ryfC" target="_blank"><img alt="极客时间" src="https://www.wangbase.com/blogimg/asset/201909/bg2019091613.jpg" style="border: 1px solid #666;display: block !important;width:100%;max-width:100%;"></a>
+  </p>
+  </div>
+
+<div id="related_entries">
+<h2>相关文章</h2>
+<ul>
+
+<li><strong>2019.09.01: <a href="http://www.ruanyifeng.com/blog/2019/09/react-hooks.html">React Hooks 入门教程</a></strong>
+
+                           <div class="entry-body">
+                              React 是主流的前端框架，v16.8 版本引入了全新的 API，叫做 React Hooks，颠覆了以前的用法。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2019.08.06: <a href="http://www.ruanyifeng.com/blog/2019/08/web_components.html">Web Components 入门实例教程</a></strong>
+
+                           <div class="entry-body">
+                              组件是前端的发展方向，现在流行的 React 和 Vue 都是组件框架。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2019.04.15: <a href="http://www.ruanyifeng.com/blog/2019/04/user-tracking.html">如何用网页脚本追踪用户</a></strong>
+
+                           <div class="entry-body">
+                              本文介绍如何编写 JavaScript 脚本，将用户数据发回服务器。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2019.02.09: <a href="http://www.ruanyifeng.com/blog/2019/02/npx.html">npx 使用教程</a></strong>
+
+                           <div class="entry-body">
+                              npm 从5.2版开始，增加了 npx 命令。它有很多用处，本文介绍该命令的主要使用场景。
+
+                           </div>
+
+</li>
+
+ 
+</ul>
+</div>
+
+
+<div id="cre" style="display: block !important;">
+<h2>广告<a href="/support.html">（购买广告位）</a></h2>
+<div id="cre-inner">
+<div id="cre-left">
+
+
+<p style="font-size:16px;text-align:center;"><a title="优达学城" href="https://cn.udacity.com/20191111/?utm_source=ruanyifeng_b&amp;utm_medium=banner&amp;utm_campaign=20191111" target="_blank">优达学城双十一大优惠</a></p>
+<a title="优达学城" href="https://cn.udacity.com/20191111/?utm_source=ruanyifeng_b&amp;utm_medium=banner&amp;utm_campaign=20191111" target="_blank"><img alt="=&quot;优达学城&quot;" src="https://www.wangbase.com/blogimg/asset/201910/bg2019101601.jpg" style="border:none;"></a>
+
+</div>
+<div id="cre-right">
+
+<p style="font-size:16px;text-align:center;"><a title="爱前端" href="https://tb.53kf.com/code/client/10147734/1" target="_blank">免费前端架构课报名</a></p>
+<a title="爱前端" href="https://tb.53kf.com/code/client/10147734/1" target="_blank"><img alt="=&quot;爱前端&quot;" src="https://www.wangbase.com/blogimg/asset/201910/bg2019100901.jpg" style="border:none;"></a>
+
+
+</div>
+</div>
+</div>
+
+                    
+
+                    <div id="comments" class="comments">
+
+
+    
+    
+        
+    <h2 class="comments-header">留言（31条）</h2>
+
+    <div id="comments-content" class="comments-content" style="clear: left;">
+        
+        <div id="comment-125045" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Sw</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125045">
+            <p>补充下，以前大旗甚至把豆瓣小组的讨论抓过去，再给每个发言人设一个新用户。。。。搞得和真的一样，太囧了</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 12, 2008  9:42 PM">2008年10月12日 21:42</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125045">#</a>
+ | <a href="#comment-text" title="引用Sw的这条留言" onclick="return CommentQuote('comment-quote-125045','Sw');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125046" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Sw</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125046">
+            <p>抱歉我上面的留言好像把大旗和另一个网站搞混了，可以删了&gt;</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 12, 2008  9:48 PM">2008年10月12日 21:48</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125046">#</a>
+ | <a href="#comment-text" title="引用Sw的这条留言" onclick="return CommentQuote('comment-quote-125046','Sw');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125048" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">乐山市</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125048">
+            <p>是啊，鲜果很无耻。我看不到实际地址，我不可能收藏鲜果的地址啊。我肯定收藏别人的实际地址。<br>
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 12, 2008  9:51 PM">2008年10月12日 21:51</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125048">#</a>
+ | <a href="#comment-text" title="引用乐山市的这条留言" onclick="return CommentQuote('comment-quote-125048','乐山市');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125067" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.kenengba.com" href="http://www.kenengba.com" target="_blank" rel="nofollow">Jason Ng</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125067">
+            <p>问题是，如果这段代码放在网页头部，如果他们不是嵌入整个网页，而是将Feed嵌入到框架里，那这段代码就等于无用了。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 12, 2008 10:30 PM">2008年10月12日 22:30</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125067">#</a>
+ | <a href="#comment-text" title="引用Jason Ng的这条留言" onclick="return CommentQuote('comment-quote-125067','Jason Ng');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125068" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://xbeta.info" href="http://xbeta.info" target="_blank" rel="nofollow">善用佳软</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125068">
+            <p>多谢提醒并分享解决办法。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 12, 2008 10:35 PM">2008年10月12日 22:35</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125068">#</a>
+ | <a href="#comment-text" title="引用善用佳软的这条留言" onclick="return CommentQuote('comment-quote-125068','善用佳软');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125115" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Ruan Yifeng</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125115">
+            <blockquote>
+<pre>引用Jason Ng的发言：</pre>
+
+<p> 问题是，如果这段代码放在网页头部，如果他们不是嵌入整个网页，而是将Feed嵌入到框架里，那这段代码就等于无用了。</p>
+
+</blockquote>
+
+<p>这个没办法，除非你的Feed不提供全文。<br>
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008 12:43 AM">2008年10月13日 00:43</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125115">#</a>
+ | <a href="#comment-text" title="引用Ruan Yifeng的这条留言" onclick="return CommentQuote('comment-quote-125115','Ruan Yifeng');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125157" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">拉等</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125157">
+            <p>这种将访问全部建立在别人网站上，却打着自己提供的内容的样子</p>
+
+<p>消耗别人资源为自己谋利益的行为和盗链有什么区别，和讯雷有什么区别。和一些什么资源站，全部都是链别人资源有什么区别。</p>
+
+<p><br>
+这是无耻的行为。<br>
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  2:33 AM">2008年10月13日 02:33</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125157">#</a>
+ | <a href="#comment-text" title="引用拉等的这条留言" onclick="return CommentQuote('comment-quote-125157','拉等');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125158" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">拉等</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125158">
+            <p>不是未经许可，而是未经书面许可</p>
+
+<p>不然人家说得到衍生许可或者间接许可，从别人那复制或者引用</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  2:36 AM">2008年10月13日 02:36</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125158">#</a>
+ | <a href="#comment-text" title="引用拉等的这条留言" onclick="return CommentQuote('comment-quote-125158','拉等');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125306" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.tradehouse.co.nz" href="http://www.tradehouse.co.nz" target="_blank" rel="nofollow">welco</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125306">
+            <p>恩 把首页导入比较好 这样不读图片的话 可以节省流量 还可以自我宣传</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  8:24 AM">2008年10月13日 08:24</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125306">#</a>
+ | <a href="#comment-text" title="引用welco的这条留言" onclick="return CommentQuote('comment-quote-125306','welco');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125317" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.blogjune.com" href="http://www.blogjune.com" target="_blank" rel="nofollow">june</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125317">
+            <p>每天4w的点击是如何产生的？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  9:04 AM">2008年10月13日 09:04</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125317">#</a>
+ | <a href="#comment-text" title="引用june的这条留言" onclick="return CommentQuote('comment-quote-125317','june');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125318" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">haibinchenxi</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125318">
+            <p>强烈支持，国内就是太多这种流氓，连基本的作者和出处都不注明。就连很多大的媒体和网站都是如此，令人恶心</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  9:17 AM">2008年10月13日 09:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125318">#</a>
+ | <a href="#comment-text" title="引用haibinchenxi的这条留言" onclick="return CommentQuote('comment-quote-125318','haibinchenxi');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125320" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://jiaren.org" href="http://jiaren.org" target="_blank" rel="nofollow">阿企</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125320">
+            <p>强烈支持</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  9:23 AM">2008年10月13日 09:23</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125320">#</a>
+ | <a href="#comment-text" title="引用阿企的这条留言" onclick="return CommentQuote('comment-quote-125320','阿企');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125328" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">看不见的城市</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125328">
+            <p>我们这社会下，产生任何怪胎、丑恶都已经不足为奇</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  9:27 AM">2008年10月13日 09:27</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125328">#</a>
+ | <a href="#comment-text" title="引用看不见的城市的这条留言" onclick="return CommentQuote('comment-quote-125328','看不见的城市');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125370" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">sumnny</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125370">
+            <p>觉得鲜果这类的网站应该更像导航站，比如http://www.xianguo.com/go.php?fi=381979378，从他网站的某处点了之后完全应该是最后跳转到blog的实际网址，这样对blog才是公平的。可惜国内网站流氓惯了……</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008 11:25 AM">2008年10月13日 11:25</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125370">#</a>
+ | <a href="#comment-text" title="引用sumnny的这条留言" onclick="return CommentQuote('comment-quote-125370','sumnny');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125380" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://blog.jjuv.com" href="http://blog.jjuv.com" target="_blank" rel="nofollow">crcw</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125380">
+            <p>真的不作恶，挺难的。谢谢分享解决方法</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008 11:36 AM">2008年10月13日 11:36</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125380">#</a>
+ | <a href="#comment-text" title="引用crcw的这条留言" onclick="return CommentQuote('comment-quote-125380','crcw');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125543" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">notii</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125543">
+            <p>鲜果离死不远了，诅咒它！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008  6:27 PM">2008年10月13日 18:27</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125543">#</a>
+ | <a href="#comment-text" title="引用notii的这条留言" onclick="return CommentQuote('comment-quote-125543','notii');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125669" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://gwingwong.72pines.com" href="http://gwingwong.72pines.com" target="_blank" rel="nofollow">Gwing</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125669">
+            <p>个个都视道德如粪土啊...</p>
+
+<p>一而再,再而三地侵犯别人的著作权..</p>
+
+<p>什么时候有明文法规限制一下呢?</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 13, 2008 11:44 PM">2008年10月13日 23:44</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125669">#</a>
+ | <a href="#comment-text" title="引用Gwing的这条留言" onclick="return CommentQuote('comment-quote-125669','Gwing');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125749" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.raptium.cn" href="http://www.raptium.cn" target="_blank" rel="nofollow">raptium</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125749">
+            <p>嗯 iframe的问题要值得重视<br>
+最近clickjacking的出现 iframe有更加可怕的应用（相比隐藏地址）<br>
+你那段js最好加到所有的网页当中……</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 14, 2008  2:26 AM">2008年10月14日 02:26</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125749">#</a>
+ | <a href="#comment-text" title="引用raptium的这条留言" onclick="return CommentQuote('comment-quote-125749','raptium');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-125950" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ibokii</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-125950">
+            <p>博主的网页使用这段代码了吗？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 14, 2008 10:24 AM">2008年10月14日 10:24</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-125950">#</a>
+ | <a href="#comment-text" title="引用ibokii的这条留言" onclick="return CommentQuote('comment-quote-125950','ibokii');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-126061" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.pumaboyd.com" href="http://www.pumaboyd.com" target="_blank" rel="nofollow">pumaboyd</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-126061">
+            <p>鲜果这样的一个做法，还照成，我用手机拨号上网时，无法通过嵌套的框架查看页面</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 14, 2008  4:34 PM">2008年10月14日 16:34</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-126061">#</a>
+ | <a href="#comment-text" title="引用pumaboyd的这条留言" onclick="return CommentQuote('comment-quote-126061','pumaboyd');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-126132" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">dggxgg</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-126132">
+            <p>可恶，是说这个鲜果怎么回事，老看不到网页的实际地址，已经将其从收藏夹只删除了，现在我用抓虾。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 14, 2008  7:53 PM">2008年10月14日 19:53</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-126132">#</a>
+ | <a href="#comment-text" title="引用dggxgg的这条留言" onclick="return CommentQuote('comment-quote-126132','dggxgg');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-126225" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Ruan YiFeng</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-126225">
+            <blockquote>
+<pre>引用ibokii的发言：</pre>
+
+<p> 博主的网页使用这段代码了吗？</p>
+
+</blockquote>
+暂时还没用，因为一用的话，本文中那个举例的网址就不会有效果了。
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 15, 2008 12:44 AM">2008年10月15日 00:44</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-126225">#</a>
+ | <a href="#comment-text" title="引用Ruan YiFeng的这条留言" onclick="return CommentQuote('comment-quote-126225','Ruan YiFeng');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-126594" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Godspeed959</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-126594">
+            <p>鼎力支持一峰的观点！<br>
+我现在看你的blog是以Google Reader阅读为主，有不错的还是喜欢来这里看这个淡黄色的背景。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 15, 2008 10:02 PM">2008年10月15日 22:02</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-126594">#</a>
+ | <a href="#comment-text" title="引用Godspeed959的这条留言" onclick="return CommentQuote('comment-quote-126594','Godspeed959');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-129005" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.elviscai.com/" href="http://www.elviscai.com/" target="_blank" rel="nofollow">沈蚊</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-129005">
+            <p>咋对付20ju呢？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 26, 2008 10:09 AM">2008年10月26日 10:09</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-129005">#</a>
+ | <a href="#comment-text" title="引用沈蚊的这条留言" onclick="return CommentQuote('comment-quote-129005','沈蚊');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-178765" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.suenquan.cn" href="http://www.suenquan.cn" target="_blank" rel="nofollow">suenquan</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-178765">
+            <p>用上了,谢谢</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="April 13, 2009 10:49 AM">2009年4月13日 10:49</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-178765">#</a>
+ | <a href="#comment-text" title="引用suenquan的这条留言" onclick="return CommentQuote('comment-quote-178765','suenquan');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-212272" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">虎</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-212272">
+            <p>生效了，谢谢</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="February 19, 2011  2:20 AM">2011年2月19日 02:20</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-212272">#</a>
+ | <a href="#comment-text" title="引用虎的这条留言" onclick="return CommentQuote('comment-quote-212272','虎');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-272333" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://github.com/phplaber" href="https://github.com/phplaber" target="_blank" rel="nofollow">phplaber</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-272333">
+            <p>将近5年过去了，框架倒是用的少了，但流氓行为依然猖獗。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="June 26, 2013  7:57 PM">2013年6月26日 19:57</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-272333">#</a>
+ | <a href="#comment-text" title="引用phplaber的这条留言" onclick="return CommentQuote('comment-quote-272333','phplaber');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-280590" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://biwood.diandian.com" href="http://biwood.diandian.com" target="_blank" rel="nofollow">Biwood</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-280590">
+            <p>貌似用百度搜视频一直是这样诶</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 27, 2013 10:43 AM">2013年10月27日 10:43</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-280590">#</a>
+ | <a href="#comment-text" title="引用Biwood的这条留言" onclick="return CommentQuote('comment-quote-280590','Biwood');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-329429" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://wu" href="http://wu" target="_blank" rel="nofollow">wangkun</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-329429">
+            <p>对阮兄钦慕已久，看过无数次你的blog，今天也表示一下支持！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="June 24, 2014 10:21 AM">2014年6月24日 10:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-329429">#</a>
+ | <a href="#comment-text" title="引用wangkun的这条留言" onclick="return CommentQuote('comment-quote-329429','wangkun');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-351182" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">杉兜兜</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-351182">
+            <p>&lt;meta http-equiv="Widow-target" Content="_top"&gt;<br>
+这样好像也可以防止别人在框架里调用你的页面~<br>
+不过是写在标签里的~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="August  9, 2015 10:08 AM">2015年8月 9日 10:08</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-351182">#</a>
+ | <a href="#comment-text" title="引用杉兜兜的这条留言" onclick="return CommentQuote('comment-quote-351182','杉兜兜');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-363151" class="comment">
+    <div id="comment-last" class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://shisongyan.duapp.com" href="http://shisongyan.duapp.com" target="_blank" rel="nofollow">Dolov</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-363151">
+            <p>这几年Html5突然兴起，正好毕业随着大流进军到H5的培训当中 马上要毕业了。心里好虚。其实我对于H5还是挺有兴趣的。培训了4个月了 可是上面的那段代码还是看不太理解。像你们这种大牛是如何的练成的？给我们培训的老师每一个都强烈推荐来看你的文章。以后每天尽量啃一篇阮老师的文章。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="August 25, 2016 10:23 PM">2016年8月25日 22:23</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2008/10/anti-frameset_javascript_codes.html#comment-363151">#</a>
+ | <a href="#comment-text" title="引用Dolov的这条留言" onclick="return CommentQuote('comment-quote-363151','Dolov');">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    </div>
+        
+    
+
+
+    
+    
+    <div class="comments-open" id="comments-open">
+        <h2 class="comments-open-header">我要发表看法</h2>
+        <div class="comments-open-content">
+
+        
+            <div id="comment-greeting"></div>
+
+            <form method="post" action="http://www.ruanyifeng.com/cgi-bin/mtos/mt-comments.cgi" name="comments_form" id="comments-form" onsubmit="return pleaseWait();">
+                <input type="hidden" name="static" value="1">
+                <input type="hidden" name="entry_id" value="1132">
+                <input type="hidden" name="__lang" value="en">
+                <input type="hidden" name="parent_id" value="" id="comment-parent-id">
+                <input type="hidden" name="armor" value="1">
+                <input type="hidden" name="preview" value="">
+                <input type="hidden" name="sid" value="">
+                <div id="comments-open-data">
+            <div id="comments-open-text">
+                    <p><label for="comment-text">您的留言
+                    （HTML标签部分可用）</label></p>
+                    <p><textarea id="comment-text" name="text" rows="10" cols="50"></textarea></p>
+                </div>
+                    <div id="comment-form-name">
+                        <p><label for="comment-author">您的大名：</label></p>
+                        <p><input id="comment-author" name="author" size="30" value="">  <span class="hint"> «-必填</span></p>
+                    </div>
+                    <div id="comment-form-email">
+                        <p><label for="comment-email">电子邮件：</label></p>
+                        <p><input id="comment-email" name="email" size="30" value="">  <span class="hint"> «-必填，不公开</span></p>
+                    </div>
+                    <div id="comment-form-url">
+                        <p><label for="comment-url">个人网址：</label></p>
+                        <p><input id="comment-url" name="url" size="30" value="">  <span class="hint"> «-我信任你，不会填写广告链接</span></p>
+                    </div>
+                    <div id="comment-form-remember-me">
+                        <p>
+                        <label for="comment-bake-cookie">记住个人信息？</label><input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="!this.checked?forgetMe(document.comments_form):rememberMe(document.comments_form)" value="1" accesskey="r"></p>
+                    </div>
+                </div>
+                    <div id="comment-form-reply" style="display:none">
+                    <input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()">
+                    <label for="comment-reply" id="comment-reply-label"></label>
+                </div>
+                <div id="comments-open-captcha"></div>
+                <div id="comments-open-footer">
+<div id="wait" style="display:none;">
+<p><strong>正在发表您的评论，请稍候</strong></p>
+<p>
+<input type="text" name="percent" size="3" style="font-family:Arial; color:black;text-align:center; border-width:medium; border-style:none;">           
+<input type="text" name="chart" size="46" style="font-family:Arial;font-weight:bolder; color:black; padding:0px; border-style:none;">
+</p>
+</div>
+
+                    <p><input type="submit" accesskey="s" name="post" id="comment-submit" value="发表">  <span class="hint"> «- 点击按钮</span></p>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <script type="text/javascript" src="http://www.ruanyifeng.com/blog/js/prism.js"></script>
+        <script type="text/javascript" src="/blog/checker.js"></script> 
+            <div id="footer">
+<div id="footer-inner">
+  <div id="footer-content">
+
+     <section>
+       <h2>关注我</h2>
+       <p><a title="微博" href="http://weibo.com/ruanyf" target="_blank">微博</a></p>
+       <p><a title="Twitter" target="_blank" href="https://twitter.com/ruanyf">推特</a></p>
+       <p><a title="GitHub" target="_blank" href="https://github.com/ruanyf">GitHub</a></p>
+       <p><a title="Instagram" target="_blank" href="http://instagram.com/ruanyf">Instagram</a></p>
+<!--
+       <h2>Feed</h2>
+       <p><a title="FeedBurner" href="http://feeds.feedburner.com/ruanyifeng" target="_blank">FeedBurner</a></p>
+       <p><a title="atom.xml" href="http://www.ruanyifeng.com/blog/atom.xml" target="_blank">atom.xml</a></p>
+-->
+       <p><a title="订阅" href="https://app.feedblitz.com/f/f.fbz?Sub=348868" target="_blank">邮件订阅</a></p>
+     </section>
+
+     <section>
+<!--
+       <h2>授权方式</h2>
+       <p><a title="许可证" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">自由转载-非商用-非衍生-保持署名</a></p>
+-->
+       <h2>支持我</h2>
+       <p><a title="投放广告" href="http://www.ruanyifeng.com/support.html" target="_blank">投放广告</a></p>
+
+       <h2>联系我</h2>
+     <p>支付宝：<a title="支付宝" href="alipays://platformapi/startapp?appId=20000067&amp;url=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog" target="_blank">yifeng.ruan@gmail.com</a></p>
+       <p>Email: <a title="电子邮件" href="mailto:yifeng.ruan@gmail.com" target="_blank">yifeng.ruan@gmail.com</a></p>
+     </section>
+  
+  
+
+
+  </div>
+</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46829782-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript" src="/blog/stats.js"></script>
+<script>
+var supportImg = document.querySelector('#support-img');
+
+if (supportImg && _hmt) {
+  _hmt.push(['_trackEvent', 'banner', 'load']);
+  supportImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'banner', 'click']);
+  }, false);
+}
+
+var homepageImg = document.querySelector('#homepage_sponsor');
+if (homepageImg && _hmt) {
+  _hmt.push(['_trackEvent', 'homepage-banner', 'load']);
+  homepageImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'homepage-banner', 'click']);
+  }, false);
+}
+</script>
+
+
+<div id="share_button_proto" style="display:none;">
+<a class="bshareDiv" href="http://www.bshare.cn/share" style="display: block; text-decoration: none; padding: 0px; margin: 0px; font-size: 12px; height: 21px; width: 51px;"><div class="bsPromo bsPromo1"></div><div class="buzzButton bsStyle10" style="height:21px;color:#333;;background:transparent url(http://static.bshare.cn/frame/images/button_custom10-zh-Orange.gif) no-repeat;text-align:center;width:51px;"></div><div style="clear:both;"></div></a>
+
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=15e016b4-0028-44f1-a40d-a3c9d9c13c28&amp;style=10&amp;bgcolor=#fff&amp;bp=weixin,qqim,qzone,qqmb,sinaminiblog,fanfou,xueqiu,douban,facebook,twitter,gplus,instapaper&amp;ssc=false"></script>
+<script type="text/javascript" charset="utf-8">
+bShare.addEntry({
+    title: document.getElementById("page-title").innerHTML,
+url:window.location.href
+});
+</script>
+</div>
+
+<script>
+document.getElementById("share_button").innerHTML=document.getElementById("share_button_proto").innerHTML;
+</script>
+
+
+
+
+
+        </div>
+    </div>
+
+<div id="bsBox" class="bsBox"><div class="bsClose">X</div><div class="bsTop"><div class="bsReturn">选择其他平台 &gt;&gt;</div><span style="margin-left:15px;">分享到</span><span class="bsPlatName"></span></div><div class="bsFrameDiv"><iframe class="bShareFrame" name="bsFrame153" scrolling="no" allowtransparency="true" frameborder="0"></iframe></div><div id="bsMorePanel" style="display: none;"></div></div><div id="bsPanelHolder"><div id="bsPanel" style="display:none;"><div class="bsTitle"><a style="float:left;height:20px;line-height:20px;font-weight:bold;" class="bsSiteLink" target="_blank" href="http://www.bshare.cn/intro">分享到...</a><a class="bsSiteLink" style="cursor:pointer;float:right;height:20px;line-height:20px;font-weight:bold;" onclick="document.getElementById('bsPanel').style.display='none';">X</a><div class="bsClear"></div></div><div class="bsClear"></div><div style="padding-left:8px;background:#fff;*height:218px;"><div style="height:47px;border-bottom:1px #ccc solid;padding:4px 0 4px 16px;margin-right:8px;_padding-left:12px;"><div class="bsRlogo" onmouseover="javascript:this.className='bsRlogoSel'" onmouseout="javascript:this.className='bsRlogo'"><a href="javascript:;" onclick="javascript:bShare.share(event,'facebook');return false;" style="text-decoration:none;line-height:120%;"><div style="cursor:pointer;width:24px;height:24px;margin:0 18px 2px;background:url(http://static.bshare.cn/frame/images//logos/m2/facebook.gif) no-repeat;"></div><div style="cursor:pointer;text-align:center;width:60px;height:16px !important;overflow:hidden;color:inherit;white-space:nowrap;line-height:120% !important;">Facebook</div></a></div><div class="bsRlogo" onmouseover="javascript:this.className='bsRlogoSel'" onmouseout="javascript:this.className='bsRlogo'"><a href="javascript:;" onclick="javascript:bShare.share(event,'twitter');return false;" style="text-decoration:none;line-height:120%;"><div style="cursor:pointer;width:24px;height:24px;margin:0 18px 2px;background:url(http://static.bshare.cn/frame/images//logos/m2/twitter.gif) no-repeat;"></div><div style="cursor:pointer;text-align:center;width:60px;height:16px !important;overflow:hidden;color:inherit;white-space:nowrap;line-height:120% !important;">Twitter</div></a></div><div class="bsRlogo" onmouseover="javascript:this.className='bsRlogoSel'" onmouseout="javascript:this.className='bsRlogo'"><a href="javascript:;" onclick="javascript:bShare.share(event,'sinaminiblog');return false;" style="text-decoration:none;line-height:120%;"><div style="cursor:pointer;width:24px;height:24px;margin:0 18px 2px;background:url(http://static.bshare.cn/frame/images//logos/m2/sinaminiblog.gif) no-repeat;"></div><div style="cursor:pointer;text-align:center;width:60px;height:16px !important;overflow:hidden;color:inherit;white-space:nowrap;line-height:120% !important;">新浪微博</div></a></div></div><div class="bsLogoLink"><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="微信" onclick="javascript:bShare.share(event,'weixin');return false;" style="background:url(http://static.bshare.cn/frame/images//logos/s4/weixin.png) no-repeat;">微信</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="腾讯微博" onclick="javascript:bShare.share(event,'qqmb');return false;" style="background:url(http://static.bshare.cn/frame/images//slogos_sprite8.png) no-repeat 0 -1512px;">腾讯微博</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="豆瓣网" onclick="javascript:bShare.share(event,'douban');return false;" style="background:url(http://static.bshare.cn/frame/images//slogos_sprite8.png) no-repeat 0 -540px;">豆瓣网</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="饭否" onclick="javascript:bShare.share(event,'fanfou');return false;" style="background:url(http://static.bshare.cn/frame/images//slogos_sprite8.png) no-repeat 0 -666px;">饭否</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="雪球" onclick="javascript:bShare.share(event,'xueqiu');return false;" style="background:url(http://static.bshare.cn/frame/images//logos/s4/xueqiu.png) no-repeat;">雪球</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="电子邮件" onclick="javascript:bShare.share(event,'email');return false;" style="background:url(http://static.bshare.cn/frame/images//slogos_sprite8.png) no-repeat 0 -612px;">电子邮件</a></div></div><div class="bsLogoLink"><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="Google+" onclick="javascript:bShare.share(event,'gplus');return false;" style="background:url(http://static.bshare.cn/frame/images//logos/s4/gplus.png) no-repeat;">Google+</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="QQ空间" onclick="javascript:bShare.share(event,'qzone');return false;" style="background:url(http://static.bshare.cn/frame/images//slogos_sprite8.png) no-repeat 0 -1566px;">QQ空间</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="QQ好友" onclick="javascript:bShare.share(event,'qqim');return false;" style="background:url(http://static.bshare.cn/frame/images//logos/s4/qqim.png) no-repeat;">QQ好友</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="Instapaper" onclick="javascript:bShare.share(event,'instapaper');return false;" style="background:url(http://static.bshare.cn/frame/images//slogos_sprite8.png) no-repeat 0 -954px;">Instapaper</a></div><div class="bsLogo" onmouseover="javascript:this.className='bsLogoSel'" onmouseout="javascript:this.className='bsLogo'"><a href="javascript:;" title="美味书签" onclick="javascript:bShare.share(event,'delicious');return false;" style="background:url(http://static.bshare.cn/frame/images//slogos_sprite8.png) no-repeat 0 -432px;">美味书签</a></div></div><div class="bsClear"></div></div><div style="height:20px;line-height:20px;padding:0 8px;border-top:1px solid #e8e8e8;color:#666;background:#f2f2f2;"><div class="buzzButton" style="float:left;">更多平台... <font style="font-weight:normal;">(133)</font></div><div id="bsPower" style="float:right;text-align:right;overflow:hidden;height:100%;"><a class="bsSiteLink" style="font-size:10px;vertical-align:text-bottom;line-height:24px;cursor:pointer;" href="http://www.bshare.cn" target="_blank"><span style="font-size:10px;vertical-align:text-bottom;"><span style="color:#f60;">b</span>Share</span></a></div></div></div></div></body></html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>bb</title>
+		<link rel="stylesheet" type="text/css" href="../css/fangdajing.css"/>
+	</head>
+	<body>
+		<div class="zoom" id="zoom">
+			<div class="small" id="small">
+				<div class="float1" id="float"></div>
+				<img src="../img/小人(小).jpg" alt="小人物" title="小人物" class="smallimg" width="300px" height="450px" id="smallimg">
+			</div>
+			<div class="big" id="big">
+				<img src="../img/小人(大).jpg" alt="大人物" width="900px" height="1350px" id="bigimg" class="bigimg">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		var smallimg = document.getElementById("smallimg");
+		var small = document.getElementById("small");
+		var zoom = document.getElementById("zoom");
+		var bigimg = document.getElementById("bigimg");
+		var float1 = document.getElementById("float");
+		var big = document.getElementById("big");
+		var imgx = smallimg.offsetWidth;
+		var imgy = smallimg.offsetHeight;
+		var imgleft = smallimg.offsetLeft;
+		var imgtop = smallimg.offsetTop;
+		var floatx = float1.offsetWidth;
+		var floaty = float1.offsetHeight;
+		small.onmousemove = function(e) {
+			let fx = e.pageX;
+			let fy = e.pageY;
+			let minx = imgleft + floatx / 2;
+			let maxx = imgleft + imgx - floatx / 2;
+			let miny = imgtop + floaty / 2;
+			let maxy = imgtop + imgy - floaty / 2;
+			fx = judgex(fx, minx, maxx);
+			fy = judgey(fy, miny, maxy);
+			setParameter(fx, fy, 3);
+		}
+		small.onmouseover = function() {
+			float1.style.display = "block";
+			float1.style.cursor = 'move';
+			big.style.display = "block";
+
+		}
+		small.onmouseout = function() {
+			float1.style.display = "none";
+			big.style.display = "none";
+		}
+
+		function setParameter(a, b, c) {
+			float1.style.left = a + "px";
+			float1.style.top = b + "px";
+			bigimg.style.left = -c * a + "px";
+			bigimg.style.top = -c * b + "px";
+		}
+
+		function judgex(via, min, max) {
+			let temp = 0;
+			if ((via - min) <= 0) {
+				temp = imgleft;
+			} else if ((via - max) >= 0) {
+				temp = imgx - floatx + imgleft;
+			} else {
+				temp = via - floatx / 2;
+			}
+			return temp;
+		}
+
+		function judgey(via, min, max) {
+			let temp = 0;
+			if ((via - min) <= 0) {
+				temp = imgtop;
+			} else if (via - max >= 0) {
+				temp = imgy - floaty + imgtop;
+			} else {
+				temp = via - floaty / 2;
+			}
+			return temp;
+		}
+	</script>
+</html>
